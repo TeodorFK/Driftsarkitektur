@@ -1,0 +1,1 @@
+Det går fortere å bruke PM2 fordi da kan du bare skru på VM. Derimot når du ikke har det må du først gå inn på filen og så skrive node app.js
