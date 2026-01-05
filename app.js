@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('express');
+const mongoose = require('mongoose');
 const dbhandler = require('./handler/dbhandler');
 const default_routes = require('./routes/default_routes');
 
