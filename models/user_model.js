@@ -1,5 +1,5 @@
-const mongoosge = require('mongoose');
-const Schema = mongoose.Schema;
+const { Schema, model } = require('mongoose');
+const argon2 = require('argon2');
 
 const userSchema = new Schema({
   username: {
@@ -13,5 +13,10 @@ const userSchema = new Schema({
   },
 });
 
-const User = mongoose.model('user', userSchema);
+userShcema.pre('save', async function (next) {
+  if (!this.isModified('password')) return;
+  this.password = await argon2.hash(this.password);
+});
+
+const User = model('user', userSchema);
 module.exports = User;

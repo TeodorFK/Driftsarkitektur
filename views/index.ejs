@@ -1,13 +1,9 @@
-<%- include('./partials/head.js') %> <%- include('./partials/header.js') %>
+<%- include('./partials/head.ejs') %> <%- include('./partials/header.ejs') %>
 
-    <section>
-      <% puppys.forEach(puppy =>{ %>
-      <h2><%= puppy.name %></h2>
-      <p><%= puppy.birthYear %></p>
-      <p><%= puppy.favoriteFood %></p>
-      <p><%= puppy.powers %></p>
-      <img src="<%= puppy.img %>" alt="" />
-      <% }) %>
-    </section>
-  </body>
-</html>
+<body>
+  <h1>Signup or login to see the puppies</h1>
+  <p>
+    Kunne egentlig bare ha hatt de p åfrontpage men jeg må ha en grunn til å
+    lage bruker
+  </p>
+</body>

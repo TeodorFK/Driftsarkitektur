@@ -1,13 +1,10 @@
-const Puppy = require('../models/puppy_model');
-
-const index = async (req, res) => {
+const index = (req, res) => {
   try {
-    const puppys = await Puppy.find();
-    res.render('index', { title: 'Home', puppys });
+    res.render('index', { title: 'Home' });
   } catch (err) {
     console.log(err);
   }
-};  
+};
 module.exports = {
   index,
 };

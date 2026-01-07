@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const User = rqeuire('../models/user_model');
+const User = require('../models/user_model');
+const Puppy = require('../models/puppy_model');
 
 const createToken = (id) => {
   return jwt.sign({ id }, 'supersecret', {
@@ -8,14 +9,18 @@ const createToken = (id) => {
 };
 
 const login_get = (req, res) => {
-  res.render('login', { title: 'Login' });
+  try {
+    res.render('login', { title: 'Login' });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const login_post = async (req, res) => {
-  const { email, password } = req.body;
-  console.log(email, password);
+  const { username, password } = req.body;
+  console.log(username, password);
   try {
-    const foundUser = await User.findOne({ email: email });
+    const foundUser = await User.findOne({ username });
     console.log(foundUser._id);
     if (foundUser.password === password) {
       const token = createToken(foundUser._id);
@@ -38,10 +43,10 @@ const signup_get = (req, res) => {
 };
 
 const signup_post = async (req, res) => {
-  const { email, password } = req.body;
-  console.log(email, password);
+  const { username, password } = req.body;
+  console.log(username, password);
   try {
-    const user = await User.create({ email, password });
+    const user = await User.create({ username, password });
     console.log(user._id);
     const token = createToken(user._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: 1000 * 1000 });
@@ -52,10 +57,20 @@ const signup_post = async (req, res) => {
   }
 };
 const logout = (req, res) => {
-  res.cookie('jwt', '', { maxAge: 1 });
+  try {
+    res.cookie('jwt', '', { maxAge: 1 });
+    res.redirect('/');
+  } catch (err) {
+    console.log(err);
+  }
 };
-const profile = (req, res) => {
-  res.render('profile', { title: 'Your profile' });
+const profile = async (req, res) => {
+  try {
+    const puppys = await Puppy.find();
+    res.render('profile', { title: 'Your profile', puppys });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 module.exports = {

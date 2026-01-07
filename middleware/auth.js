@@ -4,7 +4,7 @@ const authenticate = async (req, res, next) => {
   const token = req.cookies.jwt;
 
   try {
-    await jwt.verify(token, 'secret', (err, decodedToken) => {
+    await jwt.verify(token, 'supersecret', (err, decodedToken) => {
       if (err) {
         console.log(err.message);
         res.redirect('login');

@@ -1,15 +1,17 @@
 const router = require('express').Router();
 const controller = require('../controller/user_controller.js');
-const { authenticate } = '../middelware/auth';
+const { authenticate } = require('../middleware/auth');
 
-router.get('login', controller.login_get);
+router.get('/login', controller.login_get);
 
-router.post('login', controller.login_post);
+router.post('/login', controller.login_post);
 
-router.get('signup', controller.signup_get);
+router.get('/signup', controller.signup_get);
 
-router.post('signup', controller.signup_post);
+router.post('/signup', controller.signup_post);
 
-router.get('profile', authenticate, controller.profile);
+router.get('/profile', authenticate, controller.profile);
+
+router.get('/logout', controller.logout);
 
 module.exports = router;

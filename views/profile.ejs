@@ -1,5 +1,13 @@
-<%- include('./partials/head.js') %> <%- include('./partials/header.js') %>
+<%- include('./partials/head.ejs') %> <%- include('./partials/header.ejs') %>
 
 <body>
-  <h1>Hei</h1>
+  <section>
+    <% puppys.forEach(puppy =>{ %>
+    <h2><%= puppy.name %></h2>
+    <p><%= puppy.birthYear %></p>
+    <p><%= puppy.favoriteFood %></p>
+    <p><%= puppy.powers %></p>
+    <img src="<%= puppy.img %>" alt="" />
+    <% }) %>
+  </section>
 </body>
