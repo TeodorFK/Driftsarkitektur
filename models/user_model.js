@@ -13,7 +13,7 @@ const userSchema = new Schema({
   },
 });
 
-userShcema.pre('save', async function (next) {
+userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return;
   this.password = await argon2.hash(this.password);
 });
